@@ -6,7 +6,7 @@ const openAccount = document.querySelector("#open-account");
 const loginAccount = document.querySelector("#login-account");
 const transferForm = document.querySelector("#transfer");
 const depositForm = document.querySelector("#deposit");
-const withdrawlForm = document.querySelector("#withdrawl");
+const withdrawalForm = document.querySelector("#withdrawal");
 const currentUserEl = document.querySelector("#current-user");
 const currentUserBalance = document.querySelector("#balance");
 const currentUserForms = document.querySelector(".current-user-forms");
@@ -90,6 +90,7 @@ loginAccount.addEventListener("submit", (e) => {
           <div>Balance : ${currentUser.balance}</div>
 `;
     currentUserEl.innerHTML = `
+      <div>Welcome ${currentUser.user.name}!</div>
       <div>Current user : ${currentUser.details.username}</div>
       <button id="log-out">Log out</button>
     `;
@@ -129,10 +130,10 @@ transferForm.addEventListener("submit", (e) => {
   amount.value = "";
 });
 
-withdrawlForm.addEventListener("submit", (e) => {
+withdrawalForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const { amount } = e.target;
-  currentUser.withdrawl(parseInt(amount.value));
+  currentUser.withdrawal(parseInt(amount.value));
   currentUserBalance.innerHTML = `
           <div>Balance : ${currentUser.balance}</div>
 `;

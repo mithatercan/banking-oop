@@ -17,6 +17,9 @@ class BankAccount {
   }
 
   // ACCOUNT ACTIONS
+  get user() {
+    return this.#user;
+  }
   get details() {
     return this.#details;
   }
@@ -60,7 +63,7 @@ class BankAccount {
         type: action.type,
         amount: +action.payload,
       });
-    } else if (action.type === "widthdrawl") {
+    } else if (action.type === "withdrawal") {
       this.#balance -= action.payload;
       this.#transactions.push({
         date: date,
@@ -90,7 +93,7 @@ class BankAccount {
 
   #transfer = (action) => {
     if (action.type === "send") {
-      if (parseInt(action.payload.amount) >= this.#balance) {
+      if (parseInt(action.payload.amount) <= this.#balance) {
         this.#setAmount(action);
         bank.moneyTransfer({
           id: action.payload.id,
@@ -115,16 +118,17 @@ class BankAccount {
       });
     }
   };
-  withdrawl = (amount) => {
+  withdrawal = (amount) => {
     if (this.#isOnline) {
       checkAmount(amount);
       if (amount <= this.balance) {
         this.#setAmount({
-          type: "widthdrawl",
+          type: "withdrawal",
           payload: amount,
         });
       } else {
-        throw new Error("This is more than your balance");
+        alert("You do not have enough amount to withdrawal.");
+        throw new Error("You do not have enough amount to withdrawal.");
       }
     }
   };
