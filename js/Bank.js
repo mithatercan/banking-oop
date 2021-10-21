@@ -17,7 +17,19 @@ class Bank {
   get details() {
     return this.#details;
   }
-
+  showAccounts = () => {
+    users.innerHTML = ``;
+    const inner = document.createElement("div");
+    this.#accounts.map((account) => {
+      const userContainer = document.createElement("div");
+      userContainer.innerHTML = `
+       <pre>
+         ${JSON.stringify(account.details)}
+       </pre>`;
+      inner.appendChild(userContainer);
+    });
+    users.appendChild(inner);
+  };
   openAccount = (user) => {
     const details = {
       id: uid(),
@@ -26,13 +38,7 @@ class Bank {
     };
     const account = new BankAccount(user, details);
     this.#accounts.push(account);
-
-    const userContainer = document.createElement("div");
-    userContainer.innerHTML = `
-       <pre>
-      <code>${JSON.stringify(account.details)}</code>
-       </pre>`;
-    users.appendChild(userContainer);
+    this.showAccounts();
   };
   loginAccount = (username, password) => {
     let user = null;
@@ -46,7 +52,7 @@ class Bank {
   moneyTransfer = (data) => {
     this.#accounts.map((account) => {
       if (account.details.id === data.id) {
-        account.reciveMoney(data.amount);
+        account.reciveMoney(data);
       }
     });
   };

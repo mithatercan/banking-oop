@@ -1,7 +1,9 @@
 import checkAmount from "./utils/checkAmount.js";
+import validatePassword from "./utils/validatePassword.js";
 import bank from "./Bank.js";
 class BankAccount {
   #user = {};
+  #contacts = [];
   #details = {
     id: null,
     username: null,
@@ -46,7 +48,15 @@ class BankAccount {
   logout = () => {
     this.#isOnline = false;
   };
-
+  #changeDetails = (action) => {
+    switch (action.type) {
+      case "password":
+        this.#details.password = action.payload;
+        break;
+      default:
+        break;
+    }
+  };
   #setAmount = (action) => {
     const today = new Date();
     const date =
@@ -84,7 +94,7 @@ class BankAccount {
         date: date,
         type: action.type,
         amount: +action.payload.amount,
-        id: action.payload.id,
+        id: action.payload.userId,
       });
     } else {
       throw new Error("Invalid action!");
@@ -96,14 +106,16 @@ class BankAccount {
       if (parseInt(action.payload.amount) <= this.#balance) {
         this.#setAmount(action);
         bank.moneyTransfer({
-          id: action.payload.id,
+          ...action.payload,
           amount: parseInt(action.payload.amount),
         });
+        this.#contacts.push(action.payload.id);
       } else {
         alert("You dont have enough amount to transfer.");
       }
     } else if (action.type === "recive") {
       this.#setAmount(action);
+      this.#contacts.push(action.payload.userId);
     } else {
       throw new Error("Invalid action!");
     }
@@ -138,22 +150,40 @@ class BankAccount {
       if (this.#details.id !== data.id) {
         this.#transfer({
           type: "send",
-          payload: {
-            amount: data.amount,
-            id: data.id,
-          },
+          payload: data,
         });
       }
     }
   };
-  reciveMoney = (amount) => {
-    checkAmount(amount);
+  reciveMoney = (data) => {
+    checkAmount(data.amount);
     this.#transfer({
       type: "recive",
       payload: {
-        amount: amount,
+        userId: data.currentUser,
+        amount: data.amount,
       },
     });
+  };
+  changePassword = (data) => {
+    if (this.#isOnline) {
+      if (data.current === this.#details.password) {
+        if (data.password === data.rePassword) {
+          if (validatePassword(data.password)) {
+            this.#changeDetails({
+              type: "password",
+              payload: data.password,
+            });
+          } else {
+            alert("Your password must contain only digits.");
+          }
+        } else {
+          alert("Password does not match.");
+        }
+      } else {
+        alert("It is not your current password.");
+      }
+    }
   };
 }
 

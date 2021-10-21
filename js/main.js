@@ -6,6 +6,7 @@ const openAccount = document.querySelector("#open-account");
 const loginAccount = document.querySelector("#login-account");
 const transferForm = document.querySelector("#transfer");
 const depositForm = document.querySelector("#deposit");
+const passwordForm = document.querySelector("#password");
 const withdrawalForm = document.querySelector("#withdrawal");
 const currentUserEl = document.querySelector("#current-user");
 const currentUserBalance = document.querySelector("#balance");
@@ -119,6 +120,7 @@ transferForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const { id, amount } = e.target;
   currentUser.sendMoney({
+    currentUser: currentUser.details.id,
     id: id.value,
     amount: amount.value,
   });
@@ -150,4 +152,18 @@ depositForm.addEventListener("submit", (e) => {
 `;
   amount.value = "";
   addTransactions();
+});
+
+passwordForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const { current, password, repassword } = e.target;
+  currentUser.changePassword({
+    current: current.value,
+    password: password.value,
+    rePassword: repassword.value,
+  });
+  bank.showAccounts();
+  current.value = "";
+  password.value = "";
+  repassword.value = "";
 });
