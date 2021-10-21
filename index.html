@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>OOP BANK</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li data-section="login">Login</li>
+          <li data-section="account">Account</li>
+          <li data-section="dashboard">Dasboard</li>
+        </ul>
+      </nav>
+    </header>
+    <div id="users">
+      <h1>Bank Accounts</h1>
+    </div>
+
+    <section id="account">
+      <form id="open-account">
+        <h1>Open Account</h1>
+
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Full name"
+          name="name"
+        />
+        <input
+          class="form-control"
+          type="number"
+          placeholder="Age"
+          name="age"
+        />
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Country"
+          name="country"
+        />
+        <input
+          class="form-control"
+          type="text"
+          name="job"
+          placeholder="Job title"
+        />
+        <button class="btn btn-primary" type="submit">New Account</button>
+      </form>
+    </section>
+
+    <section id="login">
+      <form id="login-account">
+        <h1>Login</h1>
+
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Username"
+          name="username"
+        />
+        <input
+          class="form-control"
+          type="password"
+          placeholder="Password"
+          name="password"
+        />
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </section>
+    <section id="dashboard">
+      <h1>Dashboard</h1>
+
+      <header>
+        <aside>
+          <span id="balance"></span>
+          <div id="current-user"></div>
+        </aside>
+        <div class="transactions"></div>
+      </header>
+      <div class="current-user-forms">
+        <form id="withdrawl">
+          <h3>Withdrawl</h3>
+          <input type="number" placeholder="Amount" name="amount" />
+          <button type="submit">widthdrawl</button>
+        </form>
+        <form id="deposit">
+          <h3>Deposit</h3>
+          <input type="number" placeholder="Amount" name="amount" />
+          <button type="submit">Deposit</button>
+        </form>
+        <form id="transfer">
+          <h3>Transfer</h3>
+          <input type="text" placeholder="User id" name="id" />
+          <input type="number" placeholder="Amount" name="amount" />
+          <button type="submit">Transfer</button>
+        </form>
+      </div>
+    </section>
+    <script src="./js/main.js" type="module"></script>
+  </body>
+</html>

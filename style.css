@@ -1,0 +1,62 @@
+.current-user-forms,
+section {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 40%;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #3944a8;
+  color: white;
+}
+
+form {
+  width: 60%;
+}
+
+form input {
+  margin: 10px 0;
+}
+form button {
+  margin-top: 10px;
+}
+
+header {
+  box-shadow: 0 0 20px 0 rgb(228, 228, 228);
+  padding: 20px;
+}
+ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style: none;
+  cursor: pointer;
+  margin: 0px 10px;
+}
