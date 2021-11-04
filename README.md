@@ -2,7 +2,7 @@
 
 Inspired by [Youtube Video](https://www.youtube.com/watch?v=O94_yN0-cVI)
 
-I wanted to try the object oriented programming concept with this project.  
+I wanted to try the object oriented programming concept on this project.  
 A very simple static web application with several functions.
 
 ## Getting started
