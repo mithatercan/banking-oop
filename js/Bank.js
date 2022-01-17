@@ -17,6 +17,7 @@ class Bank {
   get details() {
     return this.#details;
   }
+  
   showAccounts = () => {
     users.innerHTML = ``;
     const inner = document.createElement("div");
@@ -30,6 +31,7 @@ class Bank {
     });
     users.appendChild(inner);
   };
+  
   openAccount = (user) => {
     const details = {
       id: uid(),
@@ -40,6 +42,7 @@ class Bank {
     this.#accounts.push(account);
     this.showAccounts();
   };
+  
   loginAccount = (username, password) => {
     let user = null;
     this.#accounts.forEach((account) => {
@@ -49,6 +52,7 @@ class Bank {
     });
     return user;
   };
+  
   moneyTransfer = (data) => {
     this.#accounts.map((account) => {
       if (account.details.id === data.id) {
