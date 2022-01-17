@@ -22,14 +22,17 @@ class BankAccount {
   get user() {
     return this.#user;
   }
+  
   get details() {
     return this.#details;
   }
+  
   get balance() {
     if (this.#isOnline) {
       return this.#balance;
     }
   }
+  
   get transactions() {
     if (this.#isOnline) {
       return this.#transactions;
@@ -45,9 +48,11 @@ class BankAccount {
       return this;
     }
   };
+  
   logout = () => {
     this.#isOnline = false;
   };
+  
   #changeDetails = (action) => {
     switch (action.type) {
       case "password":
@@ -57,6 +62,7 @@ class BankAccount {
         break;
     }
   };
+  
   #setAmount = (action) => {
     const today = new Date();
     const date =
@@ -65,7 +71,7 @@ class BankAccount {
       (today.getMonth() + 1) +
       "-" +
       today.getDate();
-
+  
     if (action.type === "deposit") {
       this.#balance += action.payload;
       this.#transactions.push({
@@ -130,6 +136,7 @@ class BankAccount {
       });
     }
   };
+  
   withdrawal = (amount) => {
     if (this.#isOnline) {
       checkAmount(amount);
@@ -144,6 +151,7 @@ class BankAccount {
       }
     }
   };
+  
   sendMoney = (data) => {
     if (this.#isOnline) {
       checkAmount(data.amount);
@@ -155,6 +163,7 @@ class BankAccount {
       }
     }
   };
+  
   reciveMoney = (data) => {
     checkAmount(data.amount);
     this.#transfer({
@@ -165,6 +174,7 @@ class BankAccount {
       },
     });
   };
+  
   changePassword = (data) => {
     if (this.#isOnline) {
       if (data.current === this.#details.password) {
